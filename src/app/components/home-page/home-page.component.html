@@ -1,0 +1,67 @@
+<div *ngIf="a == true" class="container">
+    <div class="box">
+        <form [formGroup]='loginForm'>
+            <div class="form-group">
+                <label>Email</label>
+                <input [class.is-invalid]='email.invalid && email.touched' formControlName="email" type="text" class="form-control">
+                <div *ngIf="email.invalid && email.touched">
+                    <small *ngIf="email.errors?.required" class="text-danger">Email is required</small>
+                    <small *ngIf="email.errors?.pattern" class="text-danger">Email is invalid</small>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input [class.is-invalid]='password.invalid && password.touched' formControlName="password" type="password" class="form-control">
+                <div *ngIf="password.invalid && password.touched">
+                    <small *ngIf="password.errors?.required" class="text-danger">password is required</small>
+                    <small *ngIf="password.errors?.pattern" class="text-danger">password must contain 8 charectors , one number and one symbol .</small>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Login</button>
+            <h6>New here ?? then click registor</h6>
+            <button class="btn btn-primary" type="submit" (click)="toggleForm()">Registor</button>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="a == false" class="container2">
+    <div class="box">
+        <form [formGroup]='registorForm'>
+            <div class="form-group">
+                <label>Email</label>
+                <input [class.is-invalid]='mail.invalid && mail.touched' formControlName="email" type="text" class="form-control">
+                <div *ngIf="mail.invalid && mail.touched">
+                    <small *ngIf="mail.errors?.required" class="text-danger">Email is required</small>
+                    <small *ngIf="mail.errors?.pattern" class="text-danger">Please Enter a valid Email</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input [class.is-invalid]='pass.invalid && pass.touched' formControlName="password" type="password" class="form-control">
+                <div *ngIf="pass.invalid && pass.touched">
+                    <small *ngIf="pass.errors?.required" class="text-danger">password is required</small>
+                    <small *ngIf="pass.errors?.pattern" class="text-danger">password must contain 8 charectors , one number and one symbol .</small>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Confirm password</label>
+                <input formControlName="conPassword" type="Password" class="form-control">
+                <small *ngIf="registorForm.errors?.mismatch" class="text-danger">your password is not matching</small>
+
+            </div>
+            <div class="form-group">
+                <label>Select role</label>
+                <select class="form-control">
+                        <option>Admin</option>
+                        <option>Guest</option>
+                    </select>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Registor</button>
+            <h6>Already registor?? then click login</h6>
+            <button (click)="toggleLoginForm()" class="btn btn-primary" type="submit">Login</button>
+        </form>
+    </div>
+</div>

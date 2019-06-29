@@ -27,6 +27,10 @@
     font-size: 20px;
 }
 
+.btn:disabled {
+    cursor: not-allowed;
+}
+
 h6 {
     margin: 20px 0px 20px 0px;
 }

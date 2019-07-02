@@ -1,3 +1,4 @@
+<!--Login Form-->
 <div *ngIf="a == true" class="container">
     <div class="box">
         <form [formGroup]='loginForm' (ngSubmit)="onLogin(loginForm.value)">
@@ -22,12 +23,11 @@
                 {{loginError}}
              </label>
             <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid || apiInProgress">Login</button>
-            <h6>New here ?? then click registor</h6>
-            <button class="btn btn-primary" (click)="toggleForm()">Registor</button>
+            <h6 (click)="toggleForm()">Click here to Register </h6>
         </form>
     </div>
 </div>
-
+<!-- Registration form -->
 <div *ngIf="a == false" class="container2">
     <div class="box">
         <form [formGroup]='registorForm' (ngSubmit)="onRegistration(registorForm.value)">
@@ -51,22 +51,21 @@
             <div class="form-group">
                 <label>Confirm password</label>
                 <input formControlName="conPassword" type="Password" class="form-control">
-                <small *ngIf="registorForm.errors?.mismatch" class="text-danger">your password is not matching</small>
+                <small *ngIf="registorForm.errors?.misMatch" class="text-danger">your password is not matching</small>
 
             </div>
             <div class="form-group">
                 <label>Select role</label>
                 <select class="form-control" formControlName="user">
-                        <option value="admin">Admin</option>
-                        <option value="guest">Guest</option>
+                        <option value="True">Admin</option>
+                        <option value="False">Guest</option>
                     </select>
             </div>
             <label class="text-danger">
                 {{registrationError}}
              </label>
-            <button class="btn btn-primary" type="submit" [disabled]="!registorForm.valid || apiInProgress">Registor</button>
-            <h6>Already registor?? then click login</h6>
-            <button (click)="toggleLoginForm()" class="btn btn-primary">Login</button>
+            <button class="btn btn-primary" type="submit" [disabled]="!registorForm.valid || apiInProgress">Register</button>
+            <h6 (click)="toggleLoginForm()" (click)="cleareData()"> Click here for Login</h6>
         </form>
     </div>
 </div>

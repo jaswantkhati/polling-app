@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HomePageService } from './home-page.service';
-import { Passwordvalidator } from '../../shared//password.validator'
+import { Passwordvalidator } from '../../components/new-poll/shared/password.validator';
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'app-home-page',
@@ -9,21 +10,22 @@ import { Passwordvalidator } from '../../shared//password.validator'
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
-  a: boolean
-  b: any
-  registrationError : string
-  loginError : string
-  apiInProgress :boolean
+  check: boolean
+  getpassword: any
+  registrationError: string
+  loginError: string
+  apiInProgress: boolean
 
-  constructor(private Fb: FormBuilder,
-    private Fr: FormBuilder,
-    private homePageService: HomePageService)
-   {
-    this.a = true;
-    this.b = this.loginForm.get("password");
-    }
+  constructor(private formBuilder: FormBuilder,
+    private homePageService: HomePageService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.check = true;
+    this.getpassword = this.loginForm.get("password");
+  }
 
-  loginForm = this.Fb.group({
+  loginForm = this.formBuilder.group({
     email: ['', Validators.compose([
       Validators.required,
       Validators.pattern("^[a-zA-Z0-9.!#$%&’*+/\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$")]
@@ -34,7 +36,7 @@ export class HomePageComponent {
     ])]
   })
 
-  registorForm = this.Fr.group({
+  registorForm = this.formBuilder.group({
     email: ['', Validators.compose([Validators.required,
     Validators.pattern("^[a-zA-Z0-9.!#$%&’*+/\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$")])],
     password: ['', Validators.compose([Validators.required,
@@ -44,13 +46,13 @@ export class HomePageComponent {
   }, { validator: Passwordvalidator }
   );
 
-toggleForm() {
-    this.a = false;
+  toggleForm() {
+    this.check= false;
     this.registorForm.reset();
   }
 
   toggleLoginForm() {
-    this.a = true;
+    this.check = true;
     this.loginForm.reset();
   }
 
@@ -75,18 +77,29 @@ toggleForm() {
   }
 
   async onLogin(formData) {
-    this.apiInProgress= true;
+    this.apiInProgress = true;
     const poll = await this.homePageService.login(formData);
-    this.loginError = poll['data'];
-    this.apiInProgress= false;
+    if(!poll['error']) {
+      localStorage.setItem("token",poll['token'])
+      this.route.navigate(['/newpoll'])
+    } else {
+      this.loginError = poll['data'];
+    }
+    this.apiInProgress = false;
   }
+
   async onRegistration(formData) {
-    this.apiInProgress= true;
-  const poll = await this.homePageService.registration(formData);
- this.registrationError = poll['message'];
- this.apiInProgress= false;
-  
+    this.apiInProgress = true;
+    const poll = await this.homePageService.registration(formData);
+    this.registrationError = poll['message'];
+    if (this.registrationError == "Account Already Exists!") {
+      this.registorForm.reset();
+    } else {
+      this.onLogin(formData);
+    }
+    this.apiInProgress = false;
   }
-
-
+  cleareData() {
+    localStorage.clear();
+  }
 }

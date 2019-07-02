@@ -19,5 +19,4 @@ export class HomePageService {
   registration( body ){
     return this.http.get(`${environment.apiBase}/add_user?username=${body.email}&password=${body.password}&role=${body.user}`).toPromise();
   }
-  
 }

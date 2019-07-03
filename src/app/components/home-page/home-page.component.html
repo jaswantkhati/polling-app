@@ -1,5 +1,5 @@
 <!--Login Form-->
-<div *ngIf="a == true" class="container">
+<div *ngIf="check == true" class="container">
     <div class="box">
         <form [formGroup]='loginForm' (ngSubmit)="onLogin(loginForm.value)">
             <div class="form-group">
@@ -28,7 +28,7 @@
     </div>
 </div>
 <!-- Registration form -->
-<div *ngIf="a == false" class="container2">
+<div *ngIf="check == false" class="container2">
     <div class="box">
         <form [formGroup]='registorForm' (ngSubmit)="onRegistration(registorForm.value)">
             <div class="form-group">

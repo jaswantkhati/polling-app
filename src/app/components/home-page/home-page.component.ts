@@ -98,8 +98,11 @@ export class HomePageComponent {
       this.onLogin(formData);
     }
     this.apiInProgress = false;
+  
   }
-  cleareData() {
+  cleareData() {  
     localStorage.clear();
   }
+
+ 
 }

@@ -1,47 +1,32 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">Polling System</a>
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="#" routerLink='/newPoll'>New poll</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">View poll</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Take poll</a>
-        </li>
-    </ul>
-    <button class="btn btn-primary logout" (click)="onLogout()">logout</button>
-</nav>
-<div class="container">
-    <h2 class="m-b-5">New poll</h2>
-    <form [formGroup]='addPoll' (ngSubmit)="createPoll(addPoll.value)">
-        <div class="form-group">
+<div class="container ">
+    <h2 class="m-b-5 ">New poll</h2>
+    <form [formGroup]='addPoll' (ngSubmit)="createPoll(addPoll.value) ">
+        <div class="form-group ">
             <label>*Enter the poll tittle</label>
-            <input class="" type="text" formControlName='poll' class="form-control">
+            <input class=" " type="text " formControlName='poll' class="form-control ">
         </div>
-        <div class="row">
-            <div class="form-group col">
+        <div class="row ">
+            <div class="form-group col ">
                 <label>*Option 1</label>
-                <input class="" type="text" formControlName='option1' class="form-control width">
+                <input class=" " type="text " formControlName='option1' class="form-control width ">
             </div>
-            <div class="form-group col2">
+            <div class="form-group col2 ">
                 <label>*Option 2</label>
-                <input class="" type="text" formControlName='option2' class="form-control width">
+                <input class=" " type="text " formControlName='option2' class="form-control width ">
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col">
+        <div class="row ">
+            <div class="form-group col ">
                 <label>*Option 3</label>
-                <input class="" type="text" formControlName='option3' class="form-control width">
+                <input class=" " type="text " formControlName='option3' class="form-control width ">
             </div>
-            <div class="form-group col2">
+            <div class="form-group col2 ">
                 <label>*Option 4</label>
-                <input class="" type="text" formControlName='option4' class="form-control width">
+                <input class=" " type="text " formControlName='option4' class="form-control width ">
             </div>
         </div>
         <div>
-            <button class="btn btn-primary add" [disabled]="!addPoll.valid" type="submit">Add</button>
+            <button class="btn btn-primary add " [disabled]="!addPoll.valid " type="submit ">Add</button>
         </div>
     </form>
 </div>

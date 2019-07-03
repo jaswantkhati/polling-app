@@ -7,12 +7,16 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewPollComponent } from './components/new-poll/new-poll.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ViewpollComponent } from './components/viewpoll/viewpoll.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    NewPollComponent
+    NewPollComponent,
+    DashboardComponent,
+    ViewpollComponent
   ],
   imports: [
     BrowserModule,

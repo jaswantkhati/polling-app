@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewpollService } from './viewpoll.service'
+import { PagerService } from './paginatoin services/pager.service'
 
 @Component({
   selector: 'app-viewpoll',
@@ -13,9 +14,14 @@ export class ViewpollComponent implements OnInit {
   hide: boolean
   pollOption: any
   Id : string
+  pager: any = {};
+  pagedItems: any[];
+  
+
 
   constructor(
-    private viewpollService: ViewpollService
+    private viewpollService: ViewpollService,
+    private pagerservice : PagerService
   ) { }
 
   ngOnInit() {
@@ -26,6 +32,9 @@ export class ViewpollComponent implements OnInit {
   async getPolls() {
     const data = await this.viewpollService.allPolls();
     this.pollList = data["data"];
+    console.log(this.pollList.length);
+    this.setPage(1);
+    
   }
 
   edit(id) {
@@ -61,4 +70,12 @@ export class ViewpollComponent implements OnInit {
     this.getPolls();
     this.hide = false;
   }
+  setPage(page: number) {
+    // get pager object from service/list_polls
+    this.pager = this.pagerservice.getpager(this.pollList.length, page);
+
+    // get current page of items
+    this.pagedItems = this.pollList.slice(this.pager.startIndex, this.pager.endIndex + 1);
+}
+  
 }

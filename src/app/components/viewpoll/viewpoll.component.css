@@ -44,8 +44,14 @@ h4 {
     clear: both;
 }
 
+main {
+    position: relative;
+}
+
 footer {
     width: 100%;
+    position: sticky;
+    top: 60px;
 }
 
 ul {

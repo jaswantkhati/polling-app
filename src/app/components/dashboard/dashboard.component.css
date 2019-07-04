@@ -6,3 +6,7 @@
 .active {
     color: pink
 }
+
+a {
+    cursor: pointer;
+}

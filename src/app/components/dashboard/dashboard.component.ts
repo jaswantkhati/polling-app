@@ -19,11 +19,17 @@ export class DashboardComponent implements OnInit {
     localStorage.clear();
     this.route.navigate(['/homepage'])
   }
+
   nevigateToView(){
     this.route.navigate(['/dashboard/viewpoll'])
   }
+  
   nevigateToNew(){
     this.route.navigate(['/dashboard/newpoll'])
+  }
+
+  nevigateToTake(){
+    this.route.navigate(['/dashboard/takepoll'])
   }
 
 }

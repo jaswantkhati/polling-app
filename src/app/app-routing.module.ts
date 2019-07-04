@@ -4,6 +4,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { NewPollComponent } from './components/new-poll/new-poll.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ViewpollComponent } from './components/viewpoll/viewpoll.component';
+import { TakepollComponent } from './components/takepoll/takepoll.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
         path: 'viewpoll',
         component: ViewpollComponent
       },
+      {
+        path: 'takepoll',
+        component: TakepollComponent
+      }
     ]
   },
   {

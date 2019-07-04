@@ -1,0 +1,11 @@
+<div class="container" *ngFor="let poll of pollList ; index as i">
+    <h3> {{i+1}} : {{poll.title}}</h3>
+    <div class="wrap">
+        <form [formGroup]="voteForm" (ngSubmit)="checkBoxValue(poll._id,voteForm.value)">
+            <div class="row" *ngFor="let option of poll.options">
+                <label><input  type="radio" formControlName="checkBox" value={{option.option}}>{{option.option}} </label>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+</div>

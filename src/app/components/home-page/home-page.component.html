@@ -23,6 +23,9 @@
                 {{loginError}}
              </label>
             <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid || apiInProgress">Login</button>
+            <div class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
             <h6 (click)="toggleForm()">Click here to Register </h6>
         </form>
     </div>

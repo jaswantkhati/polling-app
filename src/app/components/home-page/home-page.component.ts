@@ -81,7 +81,7 @@ export class HomePageComponent {
     const poll = await this.homePageService.login(formData);
     if(!poll['error']) {
       localStorage.setItem("token",poll['token'])
-      this.route.navigate(['/newpoll'])
+      this.route.navigate(['dashboard/newpoll'])
     } else {
       this.loginError = poll['data'];
     }

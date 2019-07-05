@@ -59,3 +59,18 @@ ul {
     margin: auto;
     margin-top: 20px;
 }
+
+.loader {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.spinner-border {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 10rem;
+    height: 10rem;
+    border-width: 10px;
+}

@@ -18,7 +18,7 @@ export class TakepollService {
   votePoll(id, value) {
     return this.http.get(`${environment.apiBase}/do_vote`, {
       params: {
-        id,
+        id: id,
         option_text: value
       }
     }).toPromise();

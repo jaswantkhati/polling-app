@@ -12,6 +12,7 @@ export class TakepollComponent implements OnInit {
   pagedItems: any[];
   pollList : any
   selectedOption :any
+  apiInProgress :boolean
 
   constructor(
     private takepollsevices : TakepollService,
@@ -21,16 +22,18 @@ export class TakepollComponent implements OnInit {
   ngOnInit() {
     this.getPolls();
   }
+  
   async getPolls(){
+    this.apiInProgress = true;
    const data = await this.takepollsevices.allPoll();
    this.pollList = data["data"];
-   console.log(this.pollList);
+   this.apiInProgress = false;
   }
+
 async checkBoxValue(id,value) {
    await this.takepollsevices.votePoll(id,value.checkBox);
-   console.log(value.checkBox);
-   console.log(id)
   }
+
   voteForm = this.formbuilder.group({
     checkBox: ['']
   })

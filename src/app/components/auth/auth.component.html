@@ -23,7 +23,7 @@
                 {{loginError}}
              </label>
             <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid || apiInProgress">Login</button>
-            <div class="spinner-border text-success" role="status">
+            <div class="spinner-border text-success loader" role="status" *ngIf="apiInProgress">
                 <span class="sr-only">Loading...</span>
             </div>
             <h6 (click)="toggleForm()">Click here to Register </h6>
@@ -68,6 +68,9 @@
                 {{registrationError}}
              </label>
             <button class="btn btn-primary" type="submit" [disabled]="!registorForm.valid || apiInProgress">Register</button>
+            <div class="spinner-border text-success" role="status" *ngIf="apiInProgress">
+                <span class="sr-only">Loading...</span>
+            </div>
             <h6 (click)="toggleLoginForm()" (click)="cleareData()"> Click here for Login</h6>
         </form>
     </div>

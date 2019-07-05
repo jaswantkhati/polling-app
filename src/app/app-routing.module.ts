@@ -1,28 +1,33 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomePageComponent } from './components/home-page/home-page.component';
 import { NewPollComponent } from './components/new-poll/new-poll.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ViewpollComponent } from './components/viewpoll/viewpoll.component';
 import { TakepollComponent } from './components/takepoll/takepoll.component';
+import { AuthGuard } from './auth.guard';
+import { AuthComponent } from './components/auth/auth.component'
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "homepage",
+    redirectTo: "dashboard",
     pathMatch: "full"
   },
   {
-    path: "homepage",
-    component: HomePageComponent
+    path: "auth",
+    component: AuthComponent,
+    canActivate:[AuthGuard]
+    
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        component: NewPollComponent
+        redirectTo : 'newpoll',
+        pathMatch: "full"
       },
       {
         path: 'newpoll',
@@ -40,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: HomePageComponent
+    redirectTo: "auth"
   }
 ];
 

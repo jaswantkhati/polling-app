@@ -5,7 +5,9 @@
             <div class="row" *ngFor="let option of poll.options">
                 <label><input  type="radio" formControlName="checkBox" value={{option.option}}>{{option.option}} </label>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
         </form>
     </div>
 </div>

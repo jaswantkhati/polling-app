@@ -10,10 +10,13 @@ import { NewPollService } from './new-poll.service';
 })
 export class NewPollComponent implements OnInit {
 
+
+  apiInProgress : boolean
+
   constructor(
     private formBuilder :FormBuilder,
     private route : Router,
-    private newPollServices : NewPollService
+    private newPollServices : NewPollService,
   ) { }
 
   ngOnInit() {
@@ -32,7 +35,9 @@ export class NewPollComponent implements OnInit {
 }
 
 async createPoll(formData){
+  this.apiInProgress = true;
   const newpoll = await this.newPollServices.createPoll(formData);
   this.addPoll.reset();
+  this.apiInProgress = false;
 }
 }

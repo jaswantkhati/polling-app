@@ -1,30 +1,33 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { HomePageService } from './home-page.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router} from '@angular/router'
+import{ FormBuilder, Validators} from '@angular/forms'
+import { AuthService } from './auth.service'
 import { Passwordvalidator } from '../../components/new-poll/shared/password.validator';
-import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.css']
 })
-export class HomePageComponent {
+export class AuthComponent implements OnInit {
   check: boolean
   getpassword: any
   registrationError: string
   loginError: string
   apiInProgress: boolean
 
-  constructor(private formBuilder: FormBuilder,
-    private homePageService: HomePageService,
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
     private route: Router,
     private activatedRoute: ActivatedRoute
   ) {
     this.check = true;
     this.getpassword = this.loginForm.get("password");
-  }
+   }
 
+  ngOnInit() {
+  }
   loginForm = this.formBuilder.group({
     email: ['', Validators.compose([
       Validators.required,
@@ -78,7 +81,7 @@ export class HomePageComponent {
 
   async onLogin(formData) {
     this.apiInProgress = true;
-    const poll = await this.homePageService.login(formData);
+    const poll = await this.authService.login(formData);
     if(!poll['error']) {
       localStorage.setItem("token",poll['token'])
       this.route.navigate(['dashboard/newpoll'])
@@ -90,7 +93,7 @@ export class HomePageComponent {
 
   async onRegistration(formData) {
     this.apiInProgress = true;
-    const poll = await this.homePageService.registration(formData);
+    const poll = await this.authService.registration(formData);
     this.registrationError = poll['message'];
     if (this.registrationError == "Account Already Exists!") {
       this.registorForm.reset();
@@ -98,11 +101,10 @@ export class HomePageComponent {
       this.onLogin(formData);
     }
     this.apiInProgress = false;
-  
-  }
+ }
+ 
   cleareData() {  
     localStorage.clear();
   }
 
- 
 }

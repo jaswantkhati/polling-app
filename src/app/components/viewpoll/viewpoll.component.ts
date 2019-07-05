@@ -16,10 +16,9 @@ export class ViewpollComponent implements OnInit {
   Id : string
   pager: any = {};
   pagedItems: any[];
+  apInProgress: boolean;
   
-
-
-  constructor(
+constructor(
     private viewpollService: ViewpollService,
     private pagerservice : PagerService
   ) { }
@@ -27,15 +26,16 @@ export class ViewpollComponent implements OnInit {
   ngOnInit() {
     this.getPolls();
     this.hide = false;
+   
   }
 
   async getPolls() {
+    this.apInProgress =true;
     const data = await this.viewpollService.allPolls();
+    this.apInProgress =false
     this.pollList = data["data"];
-    console.log(this.pollList.length);
     this.setPage(1);
-    
-  }
+ }
 
   edit(id) {
     this.pollId = id;
@@ -49,7 +49,8 @@ export class ViewpollComponent implements OnInit {
 
   async deletePoll(uniqueId) {
     await this.viewpollService.deletePoll(uniqueId);
-    this.pollList = this.pollList.filter(e => e._id !== uniqueId)
+    this.pollList = this.pollList.filter(list=> list._id!== uniqueId);
+    this.setPage(1);
   }
 
   show(id) {

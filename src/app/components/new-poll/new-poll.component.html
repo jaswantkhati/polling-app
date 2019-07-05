@@ -29,4 +29,9 @@
             <button class="btn btn-primary add " [disabled]="!addPoll.valid " type="submit ">Add</button>
         </div>
     </form>
+    <div class="loader">
+        <div class="spinner-border text-success" role="status" *ngIf="apiInProgress">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 </div>

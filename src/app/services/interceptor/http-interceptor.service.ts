@@ -14,8 +14,6 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log(req);
-
     if (this.accessToken && req.url.includes('do_vote')) {
       req = req.clone({
         setHeaders: {
@@ -23,7 +21,6 @@ export class HttpInterceptorService implements HttpInterceptor {
         }
       });
     }
-
-    return next.handle(req);
+return next.handle(req);
   }
 }

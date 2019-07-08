@@ -1,0 +1,74 @@
+<!--Login Form-->
+<div *ngIf="check" class="container">
+    <div class="box">
+        <form [formGroup]='loginForm' (ngSubmit)="onLogin(loginForm.value)">
+            <div class="form-group">
+                <label>Email</label>
+                <input [class.is-invalid]='email.invalid && email.touched' formControlName="email" type="text" class="form-control">
+                <div *ngIf="email.invalid && email.touched">
+                    <small *ngIf="email.errors?.required" class="text-danger">Email is required</small>
+                    <small *ngIf="email.errors?.pattern" class="text-danger">Email is invalid</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input [class.is-invalid]='password.invalid && password.touched' formControlName="password" type="password" class="form-control">
+                <div *ngIf="password.invalid && password.touched">
+                    <small *ngIf="password.errors?.required" class="text-danger">password is required</small>
+                    <small *ngIf="password.errors?.pattern" class="text-danger">password must contain 8 charectors , one number and one symbol .</small>
+                </div>
+            </div>
+            <label class="text-danger">
+                {{loginError}}
+             </label>
+            <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid || apiInProgress">Login</button>
+            <div class="spinner-border text-success loader" role="status" *ngIf="apiInProgress">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <h6 (click)="toggleForm()">Click here to Register </h6>
+        </form>
+    </div>
+</div>
+<!-- Registration form -->
+<div *ngIf="!check" class="container2">
+    <div class="box">
+        <form [formGroup]='registorForm' (ngSubmit)="onRegistration(registorForm.value)">
+            <div class="form-group">
+                <label>Email</label>
+                <input [class.is-invalid]='mail.invalid && mail.touched' formControlName="email" type="text" class="form-control">
+                <div *ngIf="mail.invalid && mail.touched">
+                    <small *ngIf="mail.errors?.required" class="text-danger">Email is required</small>
+                    <small *ngIf="mail.errors?.pattern" class="text-danger">Please Enter a valid Email</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input [class.is-invalid]='pass.invalid && pass.touched' formControlName="password" type="password" class="form-control">
+                <div *ngIf="pass.invalid && pass.touched">
+                    <small *ngIf="pass.errors?.required" class="text-danger">password is required</small>
+                    <small *ngIf="pass.errors?.pattern" class="text-danger">password must contain 8 charectors , one number and one symbol .</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Confirm password</label>
+                <input formControlName="conPassword" type="Password" class="form-control">
+                <small *ngIf="registorForm.errors?.misMatch" class="text-danger">your password is not matching</small>
+            </div>
+            <div class="form-group">
+                <label>Select role</label>
+                <select class="form-control" formControlName="user">
+                        <option value="True">Admin</option>
+                        <option value="False">Guest</option>
+                    </select>
+            </div>
+            <label class="text-danger">
+                {{registrationError}}
+             </label>
+            <button class="btn btn-primary" type="submit" [disabled]="!registorForm.valid || apiInProgress">Register</button>
+            <div class="spinner-border text-success" role="status" *ngIf="apiInProgress">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <h6 (click)="toggleLoginForm()" (click)="cleareData()"> Click here for Login</h6>
+        </form>
+    </div>
+</div>

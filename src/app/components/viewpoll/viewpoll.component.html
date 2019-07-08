@@ -1,0 +1,49 @@
+<div class="main">
+    <footer aria-label="Page navigation example">
+
+        <!-- pager -->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+                <a (click)="setPage(1)" class="page-link">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+                <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
+                <a (click)="setPage(page)" class="page-link">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+                <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+                <a (click)="setPage(pager.totalPages)" class="page-link">Last</a>
+            </li>
+        </ul>
+    </footer>
+
+    <div *ngFor="let poll of pagedItems; index as i" class="container">
+        <div *ngIf="pollId !== poll._id;else elseBlock" class="else">
+            <h4> {{i+1}} : {{poll.title}}</h4>
+            <button class="btn btn-primary" (click)="edit(poll._id)">Edit</button>
+        </div>
+        <ng-template #elseBlock>
+            <input type="text" #input value=" {{poll.title}}"><button class="btn btn-primary" (click)="onSubmit(input.value)">Submit</button>
+        </ng-template>
+        <button class="btn btn-danger" (click)="deletePoll(poll._id)">Delete</button>
+        <div *ngFor="let option of poll.options; index as i" class="if">
+            <h6> {{i+1}} : {{option.option}}</h6>
+            <div class="progress">
+                <div class="progress-bar bg-warning progress-bar-striped" style="width:10%">{{option.vote}} votes</div>
+            </div><button class="btn btn-danger" (click)="deleteOption(poll._id ,option.option)">Delete</button>
+        </div>
+        <button class="btn btn-primary" *ngIf="Id !== poll._id;else thenBlock" (click)="show(poll._id)">Add option</button>
+        <ng-template #thenBlock>
+            <input type="text" #add><button class="btn btn-primary" (click)="addOption(poll._id,add.value)">Submit</button>
+        </ng-template>
+    </div>
+</div>
+<div class="loader" *ngIf="apInProgress==true">
+    <div class="spinner-border text-success" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

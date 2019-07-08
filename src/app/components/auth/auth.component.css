@@ -1,0 +1,42 @@
+.container {
+    width: 30%;
+    min-width: 350px;
+    background-color: rgba(191, 231, 221, 0.8);
+    text-align: center;
+    padding: 50px;
+    margin-top: 100px;
+    border-radius: 20px;
+    box-shadow: 5px 5px rgba(39, 38, 38, 0.3);
+}
+
+.container2 {
+    width: 50%;
+    min-width: 300px;
+    background-color: rgba(191, 231, 221, 0.8);
+    text-align: center;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 5px 5px rgba(39, 38, 38, 0.3);
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.btn {
+    width: 100%;
+    font-size: 20px;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+}
+
+h6 {
+    margin: 20px 0px 20px 0px;
+    color: red;
+    cursor: pointer;
+}
+
+h6:hover {
+    text-decoration: underline;
+}

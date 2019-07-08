@@ -1,0 +1,12 @@
+.logout {
+    right: 10px;
+    position: absolute;
+}
+
+.active {
+    color: pink
+}
+
+a {
+    cursor: pointer;
+}

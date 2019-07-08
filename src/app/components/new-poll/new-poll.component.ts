@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NewPollService } from './new-poll.service';
@@ -9,9 +10,7 @@ import { NewPollService } from './new-poll.service';
   styleUrls: ['./new-poll.component.css']
 })
 export class NewPollComponent implements OnInit {
-
-
-  apiInProgress : boolean
+apiInProgress : boolean
 
   constructor(
     private formBuilder :FormBuilder,
